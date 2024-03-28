@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mytodo.R
 import com.example.mytodo.databinding.FragmentTaskItemBinding
 
 // Adapter is responsible for managing the display of the list –binding data with the views
@@ -39,11 +40,20 @@ class MyTaskRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: MyTaskRecyclerViewAdapter.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val task = values[position]
+
+        val importanceImage = when(task.importance){
+            IMPORTANCE.LOW -> R.drawable.circle_drawable_green
+            IMPORTANCE.NORMAL -> R.drawable.circle_drawable_orange
+            IMPORTANCE.HIGH -> R.drawable.circle_drawable_red
+        }
+
+        holder.imgView.setImageResource(importanceImage)
+        holder.contentView.text = task.title
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return values.size
     }
 
 
