@@ -5,11 +5,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytodo.R
+import com.example.mytodo.ToDoListListener
 import com.example.mytodo.databinding.FragmentTaskItemBinding
 
 // Adapter is responsible for managing the display of the list –binding data with the views
 class MyTaskRecyclerViewAdapter(
-    private val values: List<Task>
+    private val values: List<Task>,
+    private val eventListener: ToDoListListener
 ): RecyclerView.Adapter<MyTaskRecyclerViewAdapter.ViewHolder>()
 {
     // onCreateViewHolder creates the ViewHolder objects
@@ -50,6 +52,14 @@ class MyTaskRecyclerViewAdapter(
 
         holder.imgView.setImageResource(importanceImage)
         holder.contentView.text = task.title
+
+        holder.itemContainer.setOnClickListener{
+            eventListener.onTaskClick(position)
+        }
+        holder.itemContainer.setOnClickListener {
+            eventListener.onTaskLongClick(position)
+            return@setOnClickListener true
+        }
     }
 
     override fun getItemCount(): Int {
