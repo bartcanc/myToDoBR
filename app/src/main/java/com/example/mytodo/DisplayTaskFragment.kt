@@ -3,10 +3,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.mytodo.IMPORTANCE
 import com.example.mytodo.R
 import com.example.mytodo.databinding.FragmentDisplayTaskBinding
-
 
 class DisplayTaskFragment : Fragment() {
     val args: DisplayTaskFragmentArgs by navArgs()
@@ -33,5 +34,20 @@ class DisplayTaskFragment : Fragment() {
             IMPORTANCE.HIGH -> R.drawable.circle_drawable_red
         }
         binding.displayImportance.setImageResource(importanceDrawable)
+
+        binding.displayEdit.setOnClickListener {
+// create an action to navigate to the AddTaskFragment with the displayed task
+            val actionEditTask =
+                DisplayTaskFragmentDirections.actionDisplayTaskFragmentToAddTaskFragment()
+// set the task to edit and the edit flag to true in the action
+            with(actionEditTask) {
+                taskToEdit = task
+                edit = true
+            }
+// use the navigate method to perform the navigation action created above
+            findNavController().navigate(actionEditTask)
+        }
     }
+
+
 }

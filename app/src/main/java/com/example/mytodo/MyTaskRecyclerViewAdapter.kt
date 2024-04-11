@@ -4,7 +4,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mytodo.IMPORTANCE
 import com.example.mytodo.R
+import com.example.mytodo.Task
 import com.example.mytodo.ToDoListListener
 import com.example.mytodo.databinding.FragmentTaskItemBinding
 
@@ -56,9 +58,9 @@ class MyTaskRecyclerViewAdapter(
         holder.itemContainer.setOnClickListener{
             eventListener.onTaskClick(position)
         }
-        holder.itemContainer.setOnClickListener {
+        holder.itemContainer.setOnLongClickListener {
             eventListener.onTaskLongClick(position)
-            return@setOnClickListener true
+            return@setOnLongClickListener true
         }
     }
 

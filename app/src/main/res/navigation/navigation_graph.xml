@@ -22,7 +22,17 @@
         android:id="@+id/addTaskFragment"
         android:name="com.example.mytodo.AddTaskFragment"
         android:label="fragment_add_task"
-        tools:layout="@layout/fragment_add_task" />
+        tools:layout="@layout/fragment_add_task" >
+        <argument
+            android:name="taskToEdit"
+            app:argType="com.example.mytodo.Task"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="edit"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
     <fragment
         android:id="@+id/displayTaskFragment"
         android:name="DisplayTaskFragment"
@@ -31,6 +41,9 @@
         >
         <argument
             android:name="task"
-            app:argType="Task" />
+            app:argType="com.example.mytodo.Task" />
+        <action
+            android:id="@+id/action_displayTaskFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
     </fragment>
 </navigation>
